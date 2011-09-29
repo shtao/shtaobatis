@@ -7,27 +7,20 @@
 	<description>对 ibatis 2.3.4.726 的扩展</description>
 	
 	<scm>
-		<connection>scm:svn:http://10.101.237.87:2401/svn/taotao/trunk/ibatis-sqlmap</connection>
-		<developerConnection>scm:svn:http://10.101.237.87:2401/svn/taotao/trunk/ibatis-sqlmap</developerConnection>		
+		<connection>scm:svn:https://shtaobatis.googlecode.com/svn/trunk/ibatis-sqlmap</connection>
+		<developerConnection>scm:svn:https://shtaobatis.googlecode.com/svn/trunk/ibatis-sqlmap</developerConnection>		
 	</scm>
-	
-	<repositories>
-		<repository>
-			<id>csc108-public</id>
-			<name>csc108-public</name>
-			<url>http://10.101.237.92:8081/nexus/content/groups/public</url>
-		</repository>
-		<repository>
-			<id>csc108-public-snapshots</id>
-			<name>csc108-public-snapshots</name>
-			<url>http://10.101.237.92:8081/nexus/content/groups/public-snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>		
-	</repositories>
 
-	<build>		
+	<build>
+	
+	<extensions>
+      <extension>
+        <groupId>org.jvnet.wagon-svn</groupId>
+        <artifactId>wagon-svn</artifactId>
+        <version>1.9</version>
+      </extension>
+    </extensions>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -84,24 +77,25 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>					
-					<tagBase>http://10.101.237.87:2401/svn/taotao/tags</tagBase>					
+					<tagBase>https://shtaobatis.googlecode.com/svn/tags</tagBase>					
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 	<distributionManagement>
-		<repository>
-			<id>csc108-release-repository</id>
-			<name>csc108 release repository</name>
-			<url>http://10.101.237.92:8081/nexus/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>csc108-snapshot-repository</id>
-			<name>csc108 Snapshot Repository</name>
-			<url>http://10.101.237.92:8081/nexus/content/repositories/snapshots</url>
-			<uniqueVersion>true</uniqueVersion>
-		</snapshotRepository>
+    <repository>
+        <id>google-release-repository</id>
+        <url>svn:https://shtaobatis.googlecode.com/svn/releases</url>
+        <uniqueVersion>false</uniqueVersion>
+    </repository>
+    <snapshotRepository>
+        <id>google-snapshot-repository</id>
+        <url>svn:https://shtaobatis.googlecode.com/svn/snapshots</url>
+        <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
 	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
