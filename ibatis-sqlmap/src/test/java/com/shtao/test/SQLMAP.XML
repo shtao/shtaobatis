@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="blog">
+	<resultMap id="blog" class="com.shtao.test.BlogData">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="rating" column="rating" />
+	</resultMap>
+	<insert id="SAVEBLOG" parameterClass="com.shtao.test.BlogData">
+		insert into blogs(id, name,rating) values(#id#, #name#,	#rating#)
+	</insert>
+	<update id="UPDATEBLOG" parameterClass="com.shtao.test.BlogData">
+		update blogs set name =
+		#name#, rating = #rating# where id =
+		#id#
+	</update>
+	<delete id="REMOVEBLOG" parameterClass="string">
+		delete from blogs where
+		id = #id#
+	</delete>
+	<select id="GETMOSTPOPULARBLOG" parameterClass="map" resultMap="blog">
+		select * from blogs order by rating desc fetch first $size$ rows only
+	</select>
+</sqlMap>

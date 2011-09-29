@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 数据源定义,使用Apache DBCP 连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!--  mysql的分页 -->
+	<bean id="paginatorByMysql" class="com.shtao.ext.ibatis.common.util.MySqlPaginator"></bean>
+	<!-- oracle的分页 -->
+	<bean id="paginatorOracle" class="com.shtao.ext.ibatis.common.util.OraclePaginator"></bean>
+	<bean id="paginatorMsSql" class="com.shtao.ext.ibatis.common.util.MsSqlPaginator"></bean>
+
+	<bean id="sqlMapClient"
+		class="com.shtao.ext.springframework.orm.ibatis.ExtSqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/SqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource" />
+		<property name="paginator" ref="paginatorMsSql"></property>
+	</bean>
+
+	<bean id="daoIbatisImpl" class="com.mydomain.dao.DAOIbatisImpl"></bean>
+
+
+</beans>

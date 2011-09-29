@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+ "http://www.csc108.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+  <settings cacheModelsEnabled="false" enhancementEnabled="true" 
+  useStatementNamespaces="true" lazyLoadingEnabled="true" 
+  databaseProductName="sqlserver"
+  />
+
+	<!--
+	  <transactionManager type="JDBC" commitRequired="true">
+	      <dataSource type="JNDI">
+	          <property name="DataSource" value="java:comp/env/jdbc/db"/>
+	      </dataSource>
+	  </transactionManager>
+	-->
+
+	<!-- for test 
+	  <transactionManager type="JDBC" commitRequired="false">
+	    <dataSource type="SIMPLE">
+	      <property name="JDBC.Driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+	      <property name="JDBC.ConnectionURL" value="jdbc:sqlserver://127.0.0.1:7788;DatabaseName=mydata"/>
+	      <property name="JDBC.Username" value="sa"/>
+	      <property name="JDBC.Password" value="admin"/>
+	    </dataSource>
+	  </transactionManager>
+	-->
+   
+   <sqlMap resource="com/shtao/test/SQLMAP.XML" /> 
+   
+ </sqlMapConfig>
